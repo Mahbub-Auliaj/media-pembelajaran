@@ -1,0 +1,542 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Berpikir Komputasional Kelas VIII</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: satu kolom seperti buku latihan. Kepala halaman memuat tujuan pembelajaran, lalu lima tab langkah, satu panel aktif sekali waktu. */
+:root{
+  --bg:#F2F4EF; --surface:#FFFFFF; --ink:#16231E; --muted:#58675F; --line:#D5DBD2;
+  --accent:#0A6C86; --accent-ink:#FFFFFF; --accent-soft:#D9EEF3;
+  --amber:#B86E00; --amber-soft:#FBEBCF;
+  --ok:#1B7F4F; --ok-soft:#D8F0E2; --bad:#B3392B; --bad-soft:#F8DCD7;
+  --grid:#DDE3DA; --cell:#F8FAF6; --block:#BCC6B9;
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1613; --surface:#16211D; --ink:#E7EFEA; --muted:#97A8A0; --line:#2B3A34;
+    --accent:#5CC3DD; --accent-ink:#06222B; --accent-soft:#12303A;
+    --amber:#F0B25A; --amber-soft:#3A2B10;
+    --ok:#58C98C; --ok-soft:#12331F; --bad:#F08A7C; --bad-soft:#3B1B16;
+    --grid:#22302A; --cell:#121C18; --block:#34443D; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1613; --surface:#16211D; --ink:#E7EFEA; --muted:#97A8A0; --line:#2B3A34;
+  --accent:#5CC3DD; --accent-ink:#06222B; --accent-soft:#12303A;
+  --amber:#F0B25A; --amber-soft:#3A2B10;
+  --ok:#58C98C; --ok-soft:#12331F; --bad:#F08A7C; --bad-soft:#3B1B16;
+  --grid:#22302A; --cell:#121C18; --block:#34443D; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;
+  padding-block:24px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.wrap{max-width:860px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);letter-spacing:-.01em;margin:6px 0 10px}
+h2{font-size:clamp(1.35rem,3.5vw,1.7rem);margin-bottom:6px}
+h3{font-size:1.1rem;margin:22px 0 8px}
+p{margin:0 0 10px}
+.eyebrow{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:1.05rem;color:var(--muted);max-width:60ch}
+.goal{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-block:16px 0}
+.goal p{margin:4px 0 0;max-width:65ch}
+
+nav.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-block:22px 20px}
+nav.steps button{
+  font:inherit;font-weight:600;font-size:.9rem;text-align:left;cursor:pointer;
+  display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);min-width:0;
+}
+nav.steps button .n{font-family:var(--font-mono);font-size:.78rem;color:var(--muted)}
+nav.steps button[aria-current="step"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+nav.steps button[aria-current="step"] .n{color:var(--accent-ink)}
+nav.steps button.done::after{content:"\2713";margin-left:auto;color:var(--ok);font-weight:700}
+nav.steps button[aria-current="step"].done::after{color:var(--accent-ink)}
+nav.steps button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-block:12px 4px}
+.pillars details{min-width:0}
+summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:2px}
+summary::-webkit-details-marker{display:none}
+summary b{font-family:var(--font-display);font-size:1.08rem}
+summary span{font-size:.88rem;color:var(--muted)}
+details[open] summary{margin-bottom:10px}
+.ex{background:var(--amber-soft);border-radius:6px;padding:8px 10px;font-size:.9rem;margin:0}
+
+.btn{font:inherit;font-weight:600;font-size:.92rem;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-block:14px 0}
+.score{font-family:var(--font-mono);font-size:.9rem;color:var(--muted)}
+input[type=number],select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--cell);color:var(--ink);max-width:100%}
+input[type=number]{width:7rem}
+input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+.fb{border-radius:6px;padding:6px 10px;font-size:.9rem;margin:8px 0 0;background:var(--accent-soft)}
+.fb.ok{background:var(--ok-soft)}
+.fb.bad{background:var(--bad-soft)}
+.fb.warn{background:var(--amber-soft)}
+
+.mrow,.task,.q{padding:12px 0;border-top:1px solid var(--line)}
+.mrow:first-child,.task:first-child,.q:first-child{border-top:0}
+.mrow{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.mrow p{flex:1 1 260px;min-width:0;margin:0}
+.mrow .fb{flex-basis:100%;margin:0}
+.task{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.task p{flex:1 1 230px;min-width:0;margin:0}
+.task .fb{flex-basis:100%;margin:0}
+.seg{display:flex;flex-wrap:wrap;gap:6px;border:0;padding:0;margin:0;min-width:0}
+.seg label{position:relative;display:block}
+.seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.seg span{display:block;padding:6px 10px;border:1px solid var(--line);border-radius:8px;font-size:.86rem;background:var(--cell)}
+.seg input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.q .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:8px}
+
+.robot{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:20px;align-items:start;margin-top:12px}
+.map{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;background:var(--grid);padding:2px;border-radius:8px;aspect-ratio:1;width:100%;max-width:340px}
+.c{background:var(--cell);position:relative;border-radius:3px;display:flex;align-items:center;justify-content:center;min-width:0}
+.c.wall{background:repeating-linear-gradient(45deg,var(--block) 0 4px,var(--cell) 4px 8px)}
+.c.goal::after{content:"";position:absolute;inset:24%;border:3px solid var(--amber);border-radius:50%}
+.c.start::before{content:"S";position:absolute;top:1px;left:4px;font-family:var(--font-mono);font-size:.62rem;color:var(--muted)}
+.c.crash{background:var(--bad-soft)}
+.bot{width:70%;height:70%;position:relative;z-index:1}
+.bot path{fill:var(--accent)}
+.lv{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.lv .btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cmds{display:flex;flex-wrap:wrap;gap:8px;margin-block:10px}
+.cmds .btn{font-family:var(--font-mono);font-size:.84rem}
+.prog{min-height:92px;border:1.5px dashed var(--line);border-radius:8px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;background:var(--surface)}
+.prog .empty{color:var(--muted);font-size:.88rem;margin:0}
+.chip{font-family:var(--font-mono);font-size:.8rem;padding:4px 8px;border-radius:6px;background:var(--accent-soft);color:var(--ink)}
+.loop{border:1px solid var(--amber);background:var(--amber-soft);border-radius:8px;padding:6px 8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--font-mono);font-size:.8rem;cursor:pointer}
+.loop.sel{outline:2px solid var(--amber)}
+.loop .step{font:inherit;width:24px;height:24px;border-radius:6px;border:1px solid var(--amber);background:var(--surface);color:var(--ink);cursor:pointer;padding:0}
+.meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;font-family:var(--font-mono);font-size:.78rem;color:var(--muted);margin-top:6px}
+
+.sumrow{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.sumrow:first-child{border-top:0}
+.bar{height:10px;border-radius:5px;background:var(--grid);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.sumrow .v{font-family:var(--font-mono);font-size:.88rem}
+.teacher{margin-top:16px}
+.teacher ul{margin:8px 0 0;padding-left:1.2rem}
+.teacher li{margin-bottom:4px;max-width:65ch}
+
+@media (max-width:720px){
+  .robot{grid-template-columns:minmax(0,1fr)}
+  .sumrow{grid-template-columns:minmax(0,1fr) auto}
+  .sumrow .bar{grid-column:1 / -1;order:3}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Informatika · Kelas VIII · Fase D</p>
+    <h1>Berpikir Komputasional</h1>
+    <p class="lead">Kelas VIII membuka bazar sekolah. Bantu panitia memecah pekerjaan, menemukan pola, lalu atur robot kurir yang mengantar kardus ke stan.</p>
+    <div class="goal">
+      <span class="eyebrow">Tujuan pembelajaran</span>
+      <p>Peserta didik mampu menguraikan masalah menjadi bagian kecil, mengenali pola di dalamnya, dan menyusun algoritma untuk menyelesaikannya.</p>
+    </div>
+  </header>
+
+  <nav class="steps" aria-label="Langkah belajar">
+    <button type="button" aria-current="step"><span class="n">1</span>Konsep</button>
+    <button type="button"><span class="n">2</span>Dekomposisi</button>
+    <button type="button"><span class="n">3</span>Pola</button>
+    <button type="button"><span class="n">4</span>Algoritma</button>
+    <button type="button"><span class="n">5</span>Ringkasan</button>
+  </nav>
+
+  <main>
+    <!-- 1 KONSEP -->
+    <section class="panel">
+      <h2>Empat pilar berpikir komputasional</h2>
+      <p class="lead">Buka tiap kartu, lalu cocokkan situasi bazar di bawahnya dengan pilar yang tepat.</p>
+      <div class="pillars">
+        <details class="card"><summary><b>Dekomposisi</b><span>Memecah masalah besar</span></summary>
+          <p>Membagi masalah besar menjadi bagian-bagian kecil yang lebih mudah dikerjakan.</p>
+          <p class="ex">Bazar dipecah menjadi perencanaan, persiapan, dan pelaksanaan.</p></details>
+        <details class="card"><summary><b>Pengenalan pola</b><span>Mencari keteraturan</span></summary>
+          <p>Menemukan kesamaan atau keteraturan yang berulang pada data atau masalah.</p>
+          <p class="ex">Stan selalu ramai saat jam istirahat, jadi stok disiapkan lebih banyak.</p></details>
+        <details class="card"><summary><b>Abstraksi</b><span>Memilih yang penting</span></summary>
+          <p>Mengambil informasi yang diperlukan dan mengabaikan detail yang tidak berpengaruh.</p>
+          <p class="ex">Denah stan cukup menunjukkan posisi meja dan pintu, tanpa warna taplak.</p></details>
+        <details class="card"><summary><b>Algoritma</b><span>Langkah berurutan</span></summary>
+          <p>Menyusun langkah yang jelas, berurutan, dan berakhir untuk menyelesaikan masalah.</p>
+          <p class="ex">Melayani pembeli: sapa, catat pesanan, siapkan, terima uang, beri kembalian.</p></details>
+      </div>
+      <h3>Cocokkan situasi dengan pilarnya</h3>
+      <div class="card" id="match"></div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="mcheck">Periksa jawaban</button>
+        <span class="score" id="mscore"></span>
+        <button type="button" class="btn" data-go="1">Lanjut ke dekomposisi</button>
+      </div>
+    </section>
+
+    <!-- 2 DEKOMPOSISI -->
+    <section class="panel" hidden>
+      <h2>Dekomposisi: pecah bazar menjadi bagian kecil</h2>
+      <p class="lead">Panitia punya sembilan tugas. Pilih satu bagian untuk setiap tugas.</p>
+      <div class="card" id="tasks"></div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="dcheck">Periksa jawaban</button>
+        <span class="score" id="dscore"></span>
+        <button type="button" class="btn" data-go="2">Lanjut ke pola</button>
+      </div>
+    </section>
+
+    <!-- 3 POLA -->
+    <section class="panel" hidden>
+      <h2>Pengenalan pola: temukan aturan yang berulang</h2>
+      <p class="lead">Cari aturan di balik angka dan urutan, lalu gunakan untuk meramalkan langkah berikutnya.</p>
+      <div class="card" id="qs"></div>
+      <div class="actions">
+        <span class="score" id="pscore"></span>
+        <button type="button" class="btn" data-go="3">Lanjut ke algoritma</button>
+      </div>
+    </section>
+
+    <!-- 4 ALGORITMA -->
+    <section class="panel" hidden>
+      <h2>Algoritma: atur robot kurir</h2>
+      <p class="lead">Susun perintah berurutan agar robot sampai di lingkaran kuning tanpa menabrak blok bergaris.</p>
+      <div class="robot">
+        <div>
+          <div class="lv" id="lv"></div>
+          <div class="map" id="map" role="img" aria-label="Peta robot kurir enam kali enam kotak"></div>
+          <div class="meta"><span id="rgoal"></span><span id="rcount"></span></div>
+        </div>
+        <div>
+          <p id="rbrief" style="margin-bottom:4px"></p>
+          <div class="cmds" id="cmds">
+            <button type="button" class="btn" data-c="maju">↑ Maju 1</button>
+            <button type="button" class="btn" data-c="kiri">↺ Putar kiri</button>
+            <button type="button" class="btn" data-c="kanan">↻ Putar kanan</button>
+            <button type="button" class="btn" data-c="loop">⟳ Ulangi</button>
+            <button type="button" class="btn" id="exitloop" hidden>Keluar dari ulangi</button>
+          </div>
+          <div class="prog" id="prog" aria-label="Daftar perintah"></div>
+          <div class="actions">
+            <button type="button" class="btn primary" id="run">Jalankan</button>
+            <button type="button" class="btn" id="undo">Hapus terakhir</button>
+            <button type="button" class="btn" id="clear">Kosongkan</button>
+          </div>
+          <p class="fb" id="rmsg" role="status">Tekan tombol perintah untuk mulai menyusun program.</p>
+          <div class="actions"><button type="button" class="btn" id="nextlv" hidden>Level berikutnya</button><button type="button" class="btn" id="tosum" hidden data-go="4">Lihat ringkasan</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 RINGKASAN -->
+    <section class="panel" hidden>
+      <h2>Ringkasan belajar</h2>
+      <p class="lead" id="sumtext"></p>
+      <div class="card" id="sum"></div>
+      <div class="actions"><button type="button" class="btn" id="restart">Mulai dari awal</button></div>
+      <details class="card teacher">
+        <summary><b>Catatan untuk guru</b><span>Alur kegiatan dan asesmen</span></summary>
+        <ul>
+          <li>Perkiraan waktu 60 menit: pemantik 5, konsep 10, dekomposisi 10, pola 10, robot kurir 20, refleksi 5.</li>
+          <li>Pemantik: tanyakan bagaimana kelas menyiapkan bazar tanpa ada yang bekerja dua kali.</li>
+          <li>Skor di halaman ini tidak tersimpan. Minta peserta didik menunjukkan layar ringkasan sebagai asesmen formatif.</li>
+          <li>Ketercapaian: menyebut empat pilar, membagi tugas ke sub-masalah yang tepat, menemukan aturan pola, dan menyelesaikan level 3 dengan perulangan.</li>
+          <li>Refleksi: Pilar mana yang paling membantu di level 3? Apa yang berubah jika jalur robot tidak berpola?</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var state={konsep:null,dekom:null,pola:[null,null,null,null],robot:[false,false,false]};
+
+  /* ---------- tab ---------- */
+  var panels=$$('.panel'),tabs=$$('nav.steps button');
+  function show(i){
+    panels.forEach(function(p,k){p.hidden=(k!==i)});
+    tabs.forEach(function(t,k){if(k===i)t.setAttribute('aria-current','step');else t.removeAttribute('aria-current')});
+    if(i===4)renderSummary();
+  }
+  function markDone(i){tabs[i].classList.add('done')}
+  tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k)})});
+  $$('[data-go]').forEach(function(b){b.addEventListener('click',function(){
+    show(+b.dataset.go);$('nav.steps').scrollIntoView({block:'start'});
+  })});
+
+  /* ---------- 1 konsep ---------- */
+  var pilar=[['dekomposisi','Dekomposisi'],['pola','Pengenalan pola'],['abstraksi','Abstraksi'],['algoritma','Algoritma']];
+  var match=[
+    ['Panitia memecah acara bazar menjadi tugas-tugas yang lebih kecil.','dekomposisi','Memecah masalah besar menjadi bagian kecil adalah dekomposisi.'],
+    ['Seorang siswa sadar bahwa stan selalu ramai pukul 10.00 setiap hari Sabtu.','pola','Keteraturan yang berulang adalah pola.'],
+    ['Denah stan hanya menggambar posisi meja dan pintu, tanpa warna taplak.','abstraksi','Membuang detail yang tidak penting adalah abstraksi.'],
+    ['Kasir menulis urutan langkah dari menyapa pembeli sampai memberi kembalian.','algoritma','Langkah berurutan yang jelas adalah algoritma.']
+  ];
+  var mh='';
+  match.forEach(function(m,i){
+    mh+='<div class="mrow"><p>'+m[0]+'</p><select id="m'+i+'" aria-label="Pilar untuk situasi '+(i+1)+'"><option value="">Pilih pilar</option>'+
+      pilar.map(function(p){return '<option value="'+p[0]+'">'+p[1]+'</option>'}).join('')+'</select><div class="fb" id="mf'+i+'" hidden></div></div>';
+  });
+  $('#match').innerHTML=mh;
+  $('#mcheck').addEventListener('click',function(){
+    var n=0;
+    match.forEach(function(m,i){
+      var v=$('#m'+i).value,f=$('#mf'+i);f.hidden=false;
+      if(v===m[1]){n++;f.className='fb ok';f.textContent='Benar. '+m[2]}
+      else if(!v){f.className='fb warn';f.textContent='Pilih satu pilar dulu.'}
+      else{f.className='fb bad';f.textContent='Belum tepat. '+m[2]}
+    });
+    state.konsep=n;$('#mscore').textContent=n+' dari '+match.length+' benar';
+    if(n===match.length)markDone(0);
+  });
+
+  /* ---------- 2 dekomposisi ---------- */
+  var bins=['Perencanaan','Persiapan','Pelaksanaan &amp; evaluasi'];
+  var tasks=[
+    ['Menentukan menu dan harga jual',0,'Keputusan awal sebelum pekerjaan lain berjalan.'],
+    ['Membagi tugas antaranggota kelompok',0,'Pembagian tugas dibuat sebelum bekerja.'],
+    ['Menghitung modal belanja',0,'Modal dihitung sebelum membeli bahan.'],
+    ['Membeli bahan di pasar',1,'Bahan disiapkan setelah rencana jadi.'],
+    ['Menghias stan',1,'Stan disiapkan sebelum hari bazar.'],
+    ['Membuat poster promosi',1,'Poster dibuat sebelum bazar dibuka.'],
+    ['Melayani pembeli',2,'Dikerjakan saat bazar berlangsung.'],
+    ['Mencatat penjualan',2,'Dicatat selama bazar berlangsung.'],
+    ['Menghitung laba akhir',2,'Dilakukan setelah penjualan selesai, sebagai evaluasi.']
+  ];
+  var th='';
+  tasks.forEach(function(t,i){
+    th+='<div class="task"><p>'+t[0]+'</p><fieldset class="seg" aria-label="Bagian untuk '+t[0]+'">'+
+      bins.map(function(b,k){return '<label><input type="radio" name="d'+i+'" value="'+k+'"><span>'+b+'</span></label>'}).join('')+
+      '</fieldset><div class="fb" id="df'+i+'" hidden></div></div>';
+  });
+  $('#tasks').innerHTML=th;
+  $('#dcheck').addEventListener('click',function(){
+    var n=0;
+    tasks.forEach(function(t,i){
+      var sel=$('input[name="d'+i+'"]:checked'),f=$('#df'+i);f.hidden=false;
+      if(sel&&+sel.value===t[1]){n++;f.className='fb ok';f.textContent='Tepat. '+t[2]}
+      else if(!sel){f.className='fb warn';f.textContent='Pilih satu bagian dulu.'}
+      else{f.className='fb bad';f.innerHTML='Seharusnya '+bins[t[1]]+'. '+t[2]}
+    });
+    state.dekom=n;$('#dscore').textContent=n+' dari '+tasks.length+' tepat';
+    if(n===tasks.length)markDone(1);
+  });
+
+  /* ---------- 3 pola ---------- */
+  var qs=[
+    {s:'Jumlah porsi terjual tiap jam: 4, 8, 12, 16. Jika pola berlanjut, berapa porsi pada jam kelima?',a:'20',r:'Selisih tetap +4 setiap jam, jadi 16 + 4 = 20.'},
+    {s:'Pengunjung yang datang tiap 30 menit: 3, 6, 12, 24 orang. Berapa orang pada 30 menit kelima?',a:'48',r:'Jumlahnya dikali 2 setiap kali, jadi 24 × 2 = 48.'},
+    {s:'Empat anggota (A, B, C, D) piket menjaga stan bergiliran, mulai A di hari pertama lalu kembali ke A setelah D. Siapa piket pada hari ke-10?',a:'B',ch:['A','B','C','D'],r:'Urutan berulang tiap 4 hari. 10 dibagi 4 bersisa 2, jadi hari ke-10 sama dengan hari ke-2, yaitu B.'},
+    {s:'Kardus disusun berbentuk persegi: susunan pertama 1 kardus, kedua 4, ketiga 9, keempat 16. Berapa kardus pada susunan kelima?',a:'25',r:'1×1, 2×2, 3×3, 4×4, jadi berikutnya 5×5 = 25.'}
+  ];
+  var qh='';
+  qs.forEach(function(q,i){
+    var inp=q.ch?'<select id="p'+i+'" aria-label="Jawaban soal '+(i+1)+'"><option value="">Pilih</option>'+q.ch.map(function(c){return '<option>'+c+'</option>'}).join('')+'</select>'
+      :'<input type="number" id="p'+i+'" inputmode="numeric" aria-label="Jawaban soal '+(i+1)+'">';
+    qh+='<div class="q"><p><b>Soal '+(i+1)+'.</b> '+q.s+'</p><div class="row">'+inp+'<button type="button" class="btn" data-q="'+i+'">Periksa</button></div><div class="fb" id="pf'+i+'" hidden></div></div>';
+  });
+  $('#qs').innerHTML=qh;
+  function polaScore(){
+    var n=state.pola.filter(function(v){return v===true}).length;
+    $('#pscore').textContent=n+' dari '+qs.length+' benar';
+    if(n===qs.length)markDone(2);
+  }
+  $$('[data-q]').forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.dataset.q,q=qs[i],v=String($('#p'+i).value).trim(),f=$('#pf'+i);f.hidden=false;
+    if(!v){f.className='fb warn';f.textContent='Isi jawabanmu dulu.';return}
+    var ok=(v===q.a);state.pola[i]=ok;
+    f.className='fb '+(ok?'ok':'bad');
+    f.textContent=(ok?'Benar. ':'Belum tepat. ')+q.r;
+    polaScore();
+  })});
+
+  /* ---------- 4 robot ---------- */
+  var DIRS=[[0,-1],[1,0],[0,1],[-1,0]];
+  var levels=[
+    {goal:'Antar kardus lurus ke stan di kanan.',start:{x:0,y:4,d:1},end:{x:4,y:4},wall:[[2,2],[3,2],[1,1]],max:99,hint:'Hitung berapa kotak yang harus dilewati.'},
+    {goal:'Robot menghadap atas. Antar kardus ke stan kanan atas.',start:{x:0,y:5,d:0},end:{x:4,y:1},wall:[[2,3],[3,3],[1,3],[2,2],[3,2]],max:99,hint:'Uraikan jadi dua bagian: lurus ke atas, lalu belok dan lurus ke kanan.'},
+    {goal:'Jalur berbentuk tangga. Selesaikan dengan paling banyak 6 blok.',start:{x:0,y:5,d:1},end:{x:4,y:1},wall:[[0,3],[0,4],[1,2],[2,1],[3,4],[4,4],[4,5]],max:6,hint:'Cari langkah yang berulang pada tangga, lalu bungkus dengan Ulangi.'}
+  ];
+  var lv=0,prog=[],target=null,running=false,timer=null;
+  var map=$('#map'),pg=$('#prog');
+
+  function isWall(x,y){return levels[lv].wall.some(function(w){return w[0]===x&&w[1]===y})}
+  function drawMap(pos,crash){
+    var L=levels[lv],h='';
+    for(var y=0;y<6;y++)for(var x=0;x<6;x++){
+      var c='c';
+      if(isWall(x,y))c+=' wall';
+      if(L.end.x===x&&L.end.y===y)c+=' goal';
+      if(L.start.x===x&&L.start.y===y)c+=' start';
+      var here=(pos.x===x&&pos.y===y);
+      if(here&&crash)c+=' crash';
+      h+='<div class="'+c+'">'+(here?'<svg class="bot" viewBox="0 0 20 20" style="transform:rotate('+(pos.d*90)+'deg)" aria-hidden="true"><path d="M10 2 17 17 10 13 3 17Z"/></svg>':'')+'</div>';
+    }
+    map.innerHTML=h;
+  }
+  function blocks(){return prog.reduce(function(n,it){return n+(it.type==='loop'?1+it.body.length:1)},0)}
+  var label={maju:'↑ Maju',kiri:'↺ Kiri',kanan:'↻ Kanan'};
+  function drawProg(){
+    if(!prog.length){pg.innerHTML='<p class="empty">Perintah akan muncul di sini.</p>'}
+    else{
+      pg.innerHTML=prog.map(function(it,i){
+        if(it.type!=='loop')return '<span class="chip">'+label[it.type]+'</span>';
+        return '<div class="loop'+(target===i?' sel':'')+'" data-i="'+i+'">Ulangi <button type="button" class="step" data-a="dec" data-i="'+i+'" aria-label="Kurangi">−</button><b>'+it.n+'×</b><button type="button" class="step" data-a="inc" data-i="'+i+'" aria-label="Tambah">+</button>'+
+          (it.body.length?it.body.map(function(c){return '<span class="chip">'+label[c.type]+'</span>'}).join(''):'<span>(kosong)</span>')+'</div>';
+      }).join('');
+    }
+    var L=levels[lv];
+    $('#rcount').textContent='Blok: '+blocks()+(L.max<99?' / '+L.max:'');
+    $('#exitloop').hidden=(target===null);
+  }
+  function say(t,k){var m=$('#rmsg');m.textContent=t;m.className='fb'+(k?' '+k:'')}
+  function setBusy(b){running=b;$$('#cmds .btn, #undo, #clear, #run, #lv .btn').forEach(function(x){x.disabled=b})}
+  function resetBot(){clearInterval(timer);drawMap(levels[lv].start)}
+  function loadLevel(i){
+    lv=i;prog=[];target=null;running=false;
+    var L=levels[i];
+    $('#lv').innerHTML=levels.map(function(_,k){return '<button type="button" class="btn" data-l="'+k+'" aria-pressed="'+(k===i)+'">Level '+(k+1)+(state.robot[k]?' ✓':'')+'</button>'}).join('');
+    $$('#lv [data-l]').forEach(function(b){b.addEventListener('click',function(){loadLevel(+b.dataset.l)})});
+    $('#rgoal').textContent='Level '+(i+1)+' dari 3';
+    $('#rbrief').innerHTML='<b>'+L.goal+'</b><br><span style="color:var(--muted)">Petunjuk: '+L.hint+'</span>';
+    $('#nextlv').hidden=true;$('#tosum').hidden=true;
+    setBusy(false);drawMap(L.start);drawProg();
+    say('Tekan tombol perintah untuk mulai menyusun program.');
+  }
+  function add(t){
+    if(running)return;
+    var L=levels[lv];
+    if(blocks()>=L.max){say('Batas '+L.max+' blok sudah tercapai. Cari bagian yang berulang dan pakai Ulangi.','warn');return}
+    if(t==='loop'){prog.push({type:'loop',n:2,body:[]});target=prog.length-1}
+    else if(target!==null&&prog[target]){prog[target].body.push({type:t})}
+    else prog.push({type:t});
+    resetBot();drawProg();say('Program siap. Tekan Jalankan untuk mencoba.');
+  }
+  $$('#cmds [data-c]').forEach(function(b){b.addEventListener('click',function(){add(b.dataset.c)})});
+  $('#exitloop').addEventListener('click',function(){target=null;drawProg()});
+  pg.addEventListener('click',function(e){
+    if(running)return;
+    var s=e.target.closest('.step');
+    if(s){
+      var it=prog[+s.dataset.i];
+      it.n=Math.max(1,Math.min(9,it.n+(s.dataset.a==='inc'?1:-1)));
+      drawProg();e.stopPropagation();return;
+    }
+    var l=e.target.closest('.loop');
+    if(l){target=+l.dataset.i;drawProg()}
+  });
+  $('#undo').addEventListener('click',function(){
+    if(running)return;
+    if(target!==null&&prog[target]){
+      if(prog[target].body.length)prog[target].body.pop();
+      else{prog.splice(target,1);target=null}
+    }else prog.pop();
+    resetBot();drawProg();
+  });
+  $('#clear').addEventListener('click',function(){
+    if(running)return;
+    prog=[];target=null;resetBot();drawProg();say('Program dikosongkan.');
+  });
+  function flat(list){
+    var out=[];
+    list.forEach(function(it){
+      if(it.type==='loop'){for(var k=0;k<it.n;k++)out=out.concat(flat(it.body))}
+      else out.push(it.type);
+    });
+    return out;
+  }
+  function finish(pos){
+    var L=levels[lv];
+    if(pos.x===L.end.x&&pos.y===L.end.y){
+      state.robot[lv]=true;
+      say('Berhasil. Kardus sampai di stan dengan '+blocks()+' blok.'+(lv===2?' Tangga yang berulang dibungkus satu Ulangi. Itulah manfaat mengenali pola.':''),'ok');
+      if(state.robot.every(Boolean))markDone(3);
+      $$('#lv [data-l]').forEach(function(b,k){b.textContent='Level '+(k+1)+(state.robot[k]?' ✓':'')});
+      if(lv<2)$('#nextlv').hidden=false;else $('#tosum').hidden=false;
+    }else{
+      say('Robot berhenti di kolom '+(pos.x+1)+', baris '+(pos.y+1)+' dan belum sampai tujuan. Ubah perintahmu lalu coba lagi.','warn');
+    }
+    setBusy(false);
+  }
+  $('#run').addEventListener('click',function(){
+    if(running)return;
+    var seq=flat(prog);
+    if(!seq.length){say('Susun perintah dulu sebelum menjalankan.','warn');return}
+    if(seq.length>300){say('Program terlalu panjang. Kurangi jumlah ulangan.','warn');return}
+    var pos={x:levels[lv].start.x,y:levels[lv].start.y,d:levels[lv].start.d};
+    setBusy(true);drawMap(pos);say('Robot berjalan...');
+    var i=0;
+    timer=setInterval(function(){
+      if(i>=seq.length){clearInterval(timer);finish(pos);return}
+      var c=seq[i++];
+      if(c==='kiri')pos.d=(pos.d+3)%4;
+      else if(c==='kanan')pos.d=(pos.d+1)%4;
+      else{
+        var v=DIRS[pos.d],nx=pos.x+v[0],ny=pos.y+v[1];
+        if(nx<0||ny<0||nx>5||ny>5||isWall(nx,ny)){
+          clearInterval(timer);drawMap(pos,true);
+          say('Robot menabrak pada perintah ke-'+i+'. Periksa urutan maju dan belokmu.','bad');
+          setBusy(false);return;
+        }
+        pos.x=nx;pos.y=ny;
+      }
+      drawMap(pos);
+    },380);
+  });
+  $('#nextlv').addEventListener('click',function(){loadLevel(lv+1)});
+
+  /* ---------- 5 ringkasan ---------- */
+  function renderSummary(){
+    var polaTried=state.pola.some(function(v){return v!==null});
+    var polaN=state.pola.filter(function(v){return v===true}).length;
+    var robotN=state.robot.filter(Boolean).length;
+    var rows=[
+      ['Konsep empat pilar',state.konsep,match.length],
+      ['Dekomposisi',state.dekom,tasks.length],
+      ['Pengenalan pola',polaTried?polaN:null,qs.length],
+      ['Algoritma (robot kurir)',robotN>0?robotN:null,3]
+    ];
+    var got=0,max=0,tried=0;
+    $('#sum').innerHTML=rows.map(function(r){
+      var has=(r[1]!==null);
+      if(has){got+=r[1];tried++}
+      max+=r[2];
+      return '<div class="sumrow"><span>'+r[0]+'</span><div class="bar"><i style="width:'+(has?Math.round(r[1]/r[2]*100):0)+'%"></i></div><span class="v">'+(has?r[1]+' / '+r[2]:'belum')+'</span></div>';
+    }).join('');
+    var pct=Math.round(got/max*100),t;
+    if(!tried)t='Belum ada bagian yang dikerjakan. Mulai dari tab Konsep.';
+    else if(pct>=80)t='Kamu sudah menguasai tujuan pembelajaran ini: memecah masalah, menemukan pola, dan menyusun algoritma.';
+    else t='Skor '+pct+'%. Buka lagi tab yang masih kurang, lalu coba ulang.';
+    $('#sumtext').textContent=t;
+  }
+  $('#restart').addEventListener('click',function(){
+    state.konsep=null;state.dekom=null;state.pola=[null,null,null,null];state.robot=[false,false,false];
+    tabs.forEach(function(t){t.classList.remove('done')});
+    $$('#match select').forEach(function(s){s.value=''});
+    $$('#tasks input').forEach(function(r){r.checked=false});
+    $$('#qs input, #qs select').forEach(function(x){x.value=''});
+    $$('.mrow .fb, .task .fb, .q .fb').forEach(function(f){f.hidden=true});
+    $('#mscore').textContent='';$('#dscore').textContent='';$('#pscore').textContent='';
+    loadLevel(0);show(0);
+  });
+
+  loadLevel(0);
+})();
+</script>
+
+</body></html>
